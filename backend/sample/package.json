@@ -1,0 +1,13 @@
+{
+  "name": "sample-calculator",
+  "version": "1.0.0",
+  "description": "Sample calculator with intentional bugs for RepoMedic AI verification",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "vitest": "^3.0.4"
+  }
+}
