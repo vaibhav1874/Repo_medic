@@ -133,8 +133,12 @@ export async function generateDiagnosis(
   contextString: string,
   staticFindingsSummary: string
 ): Promise<DiagnosisResult> {
-  // If demo mode or key missing, provide deterministic demo output
-  if (config.demoMode || !config.nebius.apiKey) {
+  const isKeyPlaceholder =
+    !config.nebius.apiKey ||
+    config.nebius.apiKey.includes('your_nebius_api_key_here');
+
+  // If demo mode or key missing/placeholder, provide deterministic demo output
+  if (config.demoMode || isKeyPlaceholder) {
     return getSampleDiagnosis();
   }
 
@@ -198,14 +202,14 @@ ${contextString}
 
 Analyze the code and produce the diagnosis JSON.`;
 
-  const { rawText, metadata } = await callWithRetry(() =>
-    callNebiusApi([
-      { role: 'system', content: systemPrompt },
-      { role: 'user', content: userPrompt },
-    ])
-  );
-
   try {
+    const { rawText, metadata } = await callWithRetry(() =>
+      callNebiusApi([
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: userPrompt },
+      ])
+    );
+
     const parsed = JSON.parse(rawText);
     const validated = DiagnosisResultSchema.parse({
       ...parsed,
@@ -213,10 +217,11 @@ Analyze the code and produce the diagnosis JSON.`;
     });
     return validated;
   } catch (err: any) {
-    throw new ModelProviderError(
-      `Model returned output that failed schema validation: ${err.message}`,
-      'INVALID_RESPONSE'
-    );
+    if (err instanceof ModelProviderError && err.code === 'AUTH_ERROR') {
+      console.warn('[RepoMedic ModelProvider]: Auth failed. Falling back to sample diagnosis for demo.');
+      return getSampleDiagnosis();
+    }
+    throw err;
   }
 }
 
@@ -229,7 +234,11 @@ export async function generatePatchProposal(
   targetFileContent: string,
   targetFilePath: string
 ): Promise<PatchProposal> {
-  if (config.demoMode || !config.nebius.apiKey) {
+  const isKeyPlaceholder =
+    !config.nebius.apiKey ||
+    config.nebius.apiKey.includes('your_nebius_api_key_here');
+
+  if (config.demoMode || isKeyPlaceholder) {
     return getSamplePatchProposal(targetFilePath);
   }
 

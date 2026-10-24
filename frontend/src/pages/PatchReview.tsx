@@ -157,7 +157,7 @@ export const PatchReview: React.FC<PatchReviewProps> = ({
           justifyContent: 'center',
           zIndex: 1000,
         }}>
-          <div className="card" style={{ maxWidth: '480px', width: '90%', padding: '1.5rem', backgroundColor: '#FFFFFF' }}>
+          <div className="card" style={{ maxWidth: '480px', width: '90%', padding: '1.5rem', backgroundColor: 'var(--color-bg-surface)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--color-action)', marginBottom: '0.75rem' }}>
               <ShieldCheck size={20} />
               <h3 style={{ fontSize: '1.125rem', fontWeight: 700 }}>Confirm Patch Approval</h3>

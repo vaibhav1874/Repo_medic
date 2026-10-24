@@ -65,7 +65,7 @@ export const SourceViewer: React.FC<SourceViewerProps> = ({
         fontFamily: 'var(--font-mono)',
         fontSize: '0.8125rem',
         lineHeight: '1.6',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: 'var(--color-bg-page)',
       }}>
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <tbody>

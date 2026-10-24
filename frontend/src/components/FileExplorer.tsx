@@ -38,7 +38,7 @@ export const FileExplorer: React.FC<FileExplorerProps> = ({
           display: 'flex',
           alignItems: 'center',
           gap: '0.375rem',
-          backgroundColor: '#FFFFFF',
+          backgroundColor: 'var(--color-bg-page)',
           border: '1px solid var(--color-border)',
           borderRadius: 'var(--radius-sm)',
           padding: '0.25rem 0.5rem',

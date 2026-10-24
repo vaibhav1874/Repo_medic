@@ -79,7 +79,7 @@ export const DiffViewer: React.FC<DiffViewerProps> = ({ patch }) => {
       <div style={{
         border: '1px solid var(--color-border)',
         borderRadius: 'var(--radius-md)',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: 'var(--color-bg-surface)',
         overflow: 'hidden',
         fontFamily: 'var(--font-mono)',
         fontSize: '0.8125rem',
@@ -97,23 +97,23 @@ export const DiffViewer: React.FC<DiffViewerProps> = ({ patch }) => {
           Unified Patch Diff
         </div>
 
-        <div style={{ overflowX: 'auto', padding: '0.5rem 0', maxHeight: '450px' }}>
+        <div style={{ overflowX: 'auto', padding: '0.5rem 0', maxHeight: '450px', backgroundColor: 'var(--color-bg-page)' }}>
           {diffLines.map((line, idx) => {
             let bg = 'transparent';
             let color = 'var(--color-text-primary)';
 
             if (line.startsWith('+') && !line.startsWith('+++')) {
-              bg = 'rgba(61, 122, 90, 0.12)';
-              color = '#256041';
+              bg = 'rgba(46, 125, 82, 0.22)';
+              color = '#7EE787';
             } else if (line.startsWith('-') && !line.startsWith('---')) {
-              bg = 'rgba(155, 44, 44, 0.12)';
-              color = '#8A2424';
+              bg = 'rgba(218, 54, 51, 0.22)';
+              color = '#FFA198';
             } else if (line.startsWith('@@')) {
-              bg = 'var(--color-bg-secondary)';
-              color = 'var(--color-info)';
+              bg = 'rgba(56, 139, 253, 0.15)';
+              color = '#79C0FF';
             } else if (line.startsWith('---') || line.startsWith('+++')) {
               color = 'var(--color-text-secondary)';
-              bg = 'var(--color-bg-page)';
+              bg = 'var(--color-bg-secondary)';
             }
 
             return (
