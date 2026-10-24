@@ -1,0 +1,22 @@
+{
+  "name": "repomedic-ai",
+  "version": "1.0.0",
+  "description": "Evidence-driven repository debugging and repair system powered by NVIDIA Nemotron via Nebius Token Factory",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "npm --workspace=backend run dev",
+    "dev:frontend": "npm --workspace=frontend run dev",
+    "build": "npm --workspace=backend run build && npm --workspace=frontend run build",
+    "test": "npm --workspace=backend run test"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "author": "Vaibhav & RepoMedic Team",
+  "license": "Apache-2.0"
+}
